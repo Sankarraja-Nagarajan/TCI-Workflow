@@ -1,0 +1,232 @@
+<div class="container-fluid mb-2">
+    <div class="mb-3 heading-container">
+        <span class="heading">Gate Entry</span>
+    </div>
+    <div>
+        <form [formGroup]="gateEntryForm" class="row gap-2" id="gateEntry-container">
+            <div class="row">
+                <!-- <div class="row gap-3"> -->
+                    <div class="col">
+                        <div class="title">Gate Entry No</div>
+                        <div id="gatentryno">
+                            <mat-form-field class="col-12" appearance="outline">
+                                <!-- <mat-label>Gate Entry No</mat-label> -->
+                                <input type="text" matInput formControlName="gateEntryNo">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="title">Plant</div>
+                        <div id="plant">
+                            <mat-form-field class="col-12" appearance="outline">
+                                <mat-label></mat-label>
+                                <input type="text" matInput formControlName="Plant">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="title">Gate Entry Date</div>
+                        <div id="gatentrydate">
+                            <mat-form-field class="col-12" appearance="outline">
+                                <!-- <mat-label>Gate Entry Date</mat-label> -->
+                                <input type="text" matInput formControlName="gateEntryDate">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="title">Gate Entry Time</div>
+                        <div id="gatentrytime">
+                            <mat-form-field class="col-12" appearance="outline">
+                                <!-- <mat-label>Gate Entry Time</mat-label> -->
+                                <input type="text" matInput formControlName="gateEntryTime">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="title">PO Number</div>
+                        <div id="po">
+                            <mat-form-field class="col-12" appearance="outline">
+                                <mat-label></mat-label>
+                                <input type="text" matInput formControlName="poNumber">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="title">PO Date</div>
+                        <div id="podate">
+                            <mat-form-field class="col-12" appearance="outline">
+                                <!-- <mat-label>PO Date</mat-label> -->
+                                <input matInput formControlName="poDate">
+                            </mat-form-field>
+                        </div>
+                    </div> 
+
+
+                    <div class="col">
+                        <div class="title">Received Date</div>
+                        <div id="receiveddate">
+                            <mat-form-field class="col-12" appearance="outline">
+                                <!-- <mat-label>Received Date</mat-label> -->
+                                <input matInput formControlName="receivedDate">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <div class="col">
+                        <div class="title">Invoice Number</div>
+                        <div>
+                            <mat-form-field class="col-12" appearance="outline">
+                                <mat-label></mat-label>
+                                <input type="text" matInput formControlName="invoiceNo">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="title">Invoice Date</div>
+                        <div id="invoicedate">
+                            <mat-form-field class="col-12" appearance="outline">
+                                <!-- <mat-label>Invoice Date</mat-label> -->
+                                <input matInput formControlName="invoiceDate">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="title">Vendor Code</div>
+                        <div>
+                            <mat-form-field class="col-12" appearance="outline">
+                                <!-- <mat-label>Vendor Code</mat-label> -->
+                                <input type="text" matInput formControlName="vendorCode">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="title">Vendor Name</div>
+                        <div>
+                            <mat-form-field class="col-12" appearance="outline">
+                                <!-- <mat-label>Vendor Name</mat-label> -->
+                                <input type="text" matInput formControlName="vendorName">
+                            </mat-form-field>
+                        </div>
+                    </div> 
+                    <div class="col">
+                        <div class="title">Vehicle No</div>
+                        <div id="vehicleno">
+                            <mat-form-field class="col-12" appearance="outline">
+                                <!-- <mat-label>Vehicle No</mat-label> -->
+                                <input type="text" matInput formControlName="vehicleNo">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="title">LR No</div>
+                        <div id="lr">
+                            <mat-form-field class="col-12" appearance="outline">
+                                <!-- <mat-label>LR No</mat-label> -->
+                                <input type="text" matInput formControlName="lrNo">
+                            </mat-form-field>
+                        </div>
+                    </div> 
+                    <!-- <div class="col">
+                        <div class="title">Received Date</div>
+                        <div>
+                            <mat-form-field class="col-12" appearance="outline">
+                                <mat-label>Received Date</mat-label>
+                                <input matInput formControlName="receivedDate">
+                            </mat-form-field>
+                        </div>
+                    </div> -->
+                    <div class="col">
+                        <div class="title">Cost Center</div>
+                        <div id="costcenter">
+                            <mat-form-field class="col-12" appearance="outline">
+                                <!-- <mat-label>Cost Center</mat-label> -->
+                                <input type="text" matInput formControlName="costCenter">
+                            </mat-form-field>
+                        </div>
+                    </div> 
+                    <div class="col">
+                        <div class="title">Remarks</div>
+                        <div>
+                            <mat-form-field class="col-12" appearance="outline">
+                                <!-- <mat-label>Remarks</mat-label> -->
+                                <textarea rows="1" matInput formControlName="remarks"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col align-items-center">
+                        <mat-radio-group aria-label="Select an option">
+                            <mat-radio-button color="warn" value="1">Local</mat-radio-button>
+                            <mat-radio-button color="warn" value="2">Imports</mat-radio-button>
+                        </mat-radio-group>                      
+                    </div>
+                <!-- </div> -->
+            </div>
+            <div>
+                <div class="example-container mat-elevation-z8">
+                    <mat-table #table [dataSource]="dataSource" matSort>
+                  
+                      <ng-container matColumnDef="partsno-col">
+                        <mat-header-cell *matHeaderCellDef> Parts No </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.partsNo}} </mat-cell>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="itemno-col">
+                        <mat-header-cell *matHeaderCellDef> Item No </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.itemNo}} </mat-cell>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="desc-col">
+                        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="value-col">
+                        <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.value}} </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="poqty-col">
+                        <mat-header-cell *matHeaderCellDef> PO Qty </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.poQty}} </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="opengrqty-col">
+                        <mat-header-cell *matHeaderCellDef> Open GR Qty </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.openGRqty}} </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="secqty-col">
+                        <mat-header-cell *matHeaderCellDef> Security Qty </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.securityQty}} </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="packno-col">
+                        <mat-header-cell *matHeaderCellDef> Pack No </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.packNo}} </mat-cell>
+                      </ng-container>
+                  
+                      <mat-header-row *matHeaderRowDef="displayedColumns; sticky : true"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+
+                    <div *ngIf="!tableData?.length" class="d-flex align-items-center p-3 gap-3">
+                        <mat-icon>info</mat-icon>
+                        <span>No Records Found.....</span>
+                    </div>
+                  
+                    <mat-paginator #paginator
+                                    [style.display]="tableData?.length?'inherit':'none'"
+                                   [pageSize]="5"
+                                   [pageSizeOptions]="[5, 10, 50, 100]"
+                                   [showFirstLastButtons]="true">
+                    </mat-paginator>
+                  </div>
+            </div>
+            <div class="d-flex justify-content-end gap-3 mt-3">
+                <button mat-flat-button class="red">Cancel</button>
+                <button mat-flat-button class="orange" (click)="save()">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

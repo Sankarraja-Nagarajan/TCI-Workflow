@@ -1,0 +1,97 @@
+<div class="container-fluid row gap-3" id="dashboard">
+    <div class="row gap-5">
+        <div class="tile col-md-4">
+            <span class="title row  p-2">APPROVAL STATUS</span>
+            <div class="border"></div>
+            <div id="doughnutChart" class="row justify-content-center align-items-center mt-1">
+                <canvas baseChart style=" height: 160px"
+                        [data]="doughnutChartData"
+                        [labels]="doughnutChartLabels"
+                        [chartType]="doughnutChartType" 
+                        [options]="doughnutChartOptions"
+                        [colors]="colors">
+                </canvas>
+            </div>
+        </div>
+        <div class="tile col-md-4">
+            <span class="title row  p-2">STATUS</span>
+            <div class="border"></div>
+            <div id="doughnutChart" class="row justify-content-center align-items-center mt-1">
+                <canvas baseChart style=" height: 160px"
+                        [data]="doughnutChartData1"
+                        [labels]="doughnutChartLabels1"
+                        [chartType]="doughnutChartType1" 
+                        [options]="doughnutChartOptions1"
+                        [colors]="colors1">
+                </canvas>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="Search">
+                <mat-form-field class="w-100 Search" appearance="outline">
+                    <mat-label>Search Gate Entry No...</mat-label>
+                    <input matInput (keyup)="applyFilter($event.target.value)" #input>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="col d-flex align-items-center">
+                    <img class="w-100" src="/assets/images/Continental-Logo.png" alt="Continental Logo">
+                </div>
+                <div class="col">
+                    <img class="w-75" src="/assets/images/logo.png" alt="Continental Logo">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="table-header d-flex align-items-center"><span class="table-header-title ps-3">Table Data</span></div>
+        <div class="overflow-auto mat-elevation-z8 p-4 rounded-2 table-content">
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="GATE_ENTRY_NO">
+                    <th mat-header-cell *matHeaderCellDef> Gate Entry NO </th>
+                    <td mat-cell *matCellDef="let element"> {{element.GATE_ENTRY_NO}} </td>
+                </ng-container>
+                <ng-container matColumnDef="PLANT">
+                    <th mat-header-cell *matHeaderCellDef> Plant </th>
+                    <td mat-cell *matCellDef="let element"> {{element.PLANT}} </td>
+                </ng-container>
+                <ng-container matColumnDef="GATE_ENTRY_DATE">
+                    <th mat-header-cell *matHeaderCellDef> Gate Entry Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.GATE_ENTRY_DATE}} </td>
+                </ng-container>
+               
+                <ng-container matColumnDef="INVOICE_NO">
+                    <th mat-header-cell *matHeaderCellDef> Invoice NO </th>
+                    <td mat-cell *matCellDef="let element"> {{element.INVOICE_NO}} </td>
+                </ng-container>
+                <ng-container matColumnDef="INVOICE_DATE">
+                    <th mat-header-cell *matHeaderCellDef> Invoice Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.INVOICE_DATE}} </td>
+                </ng-container>
+                <ng-container matColumnDef="RECEIVED_DATE">
+                    <th mat-header-cell *matHeaderCellDef> Received Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.RECEIVED_DATE}} </td>
+                </ng-container>
+                <ng-container matColumnDef="STATUS" *ngIf="UserName != 'User'">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <button mat-raised-button routerLink="/pages/entry-pages/approval">Approve</button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <div *ngIf="!GateEntryDetails?.length" class="d-flex align-items-center p-3 gap-3">
+                <mat-icon class="icon">info</mat-icon>
+                <span>No Records Found.....</span>
+            </div>
+            <mat-paginator class="justify-content-end p-0"
+                  [style.display]="GateEntryDetails?.length?'inherit':'none'"
+                  [length]="GateEntryDetails?.length"
+                  [pageSize]="3"
+                  [pageSizeOptions]="[3, 10, 25, 100]"
+                  aria-label="Select page">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

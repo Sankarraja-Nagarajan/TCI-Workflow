@@ -38,6 +38,7 @@ import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
+import { RouterModule, Routes } from '@angular/router';
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -70,8 +71,10 @@ const PIPES = [
   NumberWithCommasPipe,
 ];
 
+const routes : Routes = [];
+
 @NgModule({
-  imports: [CommonModule, ...NB_MODULES],
+  imports: [CommonModule, ...NB_MODULES, RouterModule.forChild(routes)],
   exports: [CommonModule, ...PIPES, ...COMPONENTS],
   declarations: [...COMPONENTS, ...PIPES],
 })

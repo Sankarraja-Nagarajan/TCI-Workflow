@@ -1,0 +1,82 @@
+#dashboard{
+    .tile{  
+        background-color:white;
+        height: 220px;
+        box-shadow: 0 2px 6px 0 rgba(31, 0, 158, 0.16);
+        border-radius: 10px;
+    }
+    
+    #doughnutChart{
+        display: block;
+       
+    }
+    .title{
+       font-size: 17px;
+       font-weight: bold;
+    }
+    .border{
+        border-bottom: 5px solid #F3F6EE;
+    }
+
+        .table-header
+        {
+            background: orange;
+            width: 300px;
+            position: relative;
+            height: 30px;
+            line-height: 100px;
+            text-align: center;
+            border-top-left-radius: 10px;
+            color: white;
+            font-size: 21px;
+            font-family: arial, sans-serif;
+        }
+        .table-header:after {
+            position: absolute;
+            right: -60px;
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 30px solid orange;
+          }
+
+          .table-header-title
+            {
+                color: white;
+                font-weight: bold;
+                font-size: 15px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .table-content
+            {
+                border-top: 3px solid orange;
+                border-top-left-radius: 0px !important;
+            }
+        
+        table{
+            th{
+                color :white;
+                background-color: rgb(253, 180, 43);
+            }
+            td{
+                font-size: 12px;
+                min-width: max-content !important;
+                background-color: white;
+            }
+            tr{
+                height: 50px;
+            }
+            
+        }
+        
+    button{
+        background-color: rgb(230, 168, 54) !important;
+        color: white;
+    }
+}
+.icon{
+    color :rgb(247, 163, 9)
+}
