@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
+import { NbMediaBreakpointsService, NbMenuItem, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
 import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
@@ -7,6 +7,8 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../pages/Services/login.service';
+import { ForgotPasswordDialogComponent } from '../../../pages/Modules/authentication/forgot-password-dialog/forgot-password-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'ngx-header',
@@ -18,6 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
   user: any;
+  userFirstLetter : string;
 
   themes = [
     {
@@ -40,9 +43,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out', link : '/pages/authentication/login' } ];
+  userMenu : NbMenuItem [] = [ { title: 'Profile' }, { title: 'Log out' } ];
 
-  UserName : any;
+  role : string;
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -51,15 +54,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService,
               private _router : Router,
-              private _loginService : LoginService) {
+              private _loginService : LoginService, 
+              private _dialog : MatDialog) {
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
-
-    // this.userService.getUsers()
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe((users: any) => this.user = users.nick);
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
@@ -80,18 +80,43 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this._loginService.userName$.subscribe({
         next : (response) => 
         {
-          // console.log(response);
-          this.UserName = response;
+          var token = this._loginService.decryptToken(response);
+          console.log(token);
+          this.user = token.Username;
+          this.role = token.Role;
         }
       })
 
-      if(!this.UserName)
+      if(!this.user)
       {
-        this.UserName = localStorage.getItem('UserName');
+        var token = this._loginService.decryptToken(localStorage.getItem('TciToken'));
+        this.user = token.Username;
+        this.userFirstLetter = this.user.substring(0, 1);
+        this.role = token.Role;
       }
 
-      this.user = this.UserName;
+  }
 
+  collapsed = true;
+  toggleCollapsed(): void {
+    this.collapsed = !this.collapsed;
+  }
+
+  changePassword()
+  {
+    this.toggleCollapsed();
+    this._dialog.open(ForgotPasswordDialogComponent, 
+      {
+        disableClose: true,
+        backdropClass: 'userActivationDialog',
+        data : 'Change Password',
+      })
+  }
+
+  logout()
+  {
+    localStorage.removeItem('TciToken');
+    this._router.navigate(['pages/authentication/login']);
   }
 
   ngOnDestroy() {

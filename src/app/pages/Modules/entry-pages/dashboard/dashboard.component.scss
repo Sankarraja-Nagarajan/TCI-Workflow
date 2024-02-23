@@ -50,10 +50,19 @@
                 font-family: Arial, Helvetica, sans-serif;
             }
 
-            .table-content
+            .table-content-container
             {
                 border-top: 3px solid orange;
                 border-top-left-radius: 0px !important;
+
+                .mat-mdc-text-field-wrapper {
+                    height: 40px !important;
+                }
+                .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix
+                {
+                    padding-top: 9px !important;
+                }
+
             }
         
         table{
@@ -72,11 +81,242 @@
             
         }
         
-    button{
-        background-color: rgb(230, 168, 54) !important;
-        color: white;
-    }
+        .active-btn
+        {
+            background-color: rgb(112, 184, 112) !important;
+            color: white !important;
+            font-weight: bold;
+        }
 }
 .icon{
     color :rgb(247, 163, 9)
+}
+.approved
+{
+    cursor: pointer;
+    color: green;
+    font-weight: bold;
+}
+.rejected
+{
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+
+
+.cards-container
+{
+    
+    mat-card
+    {
+        border-radius: 10px;
+        box-shadow: 0 2px 6px 0 rgba(31, 0, 158, 0.16);
+    }
+
+    .cards-content
+    {
+
+        .count
+        {
+            font-size: 30px;
+        }
+
+        mat-card
+        {
+            height: 100px;
+            border-radius: 20px;
+        }
+
+        .all-card
+        {
+
+            color: white;
+            -webkit-text-stroke: 1px #F8F8F8;
+            text-shadow: 2px 4px 6px rgb(255, 2, 255);
+
+            border-bottom: 3px solid purple;
+            //color: purple;
+            font-weight: bold;
+            background-image: linear-gradient(  rgba(160, 81, 160, 0.274), rgba(160, 81, 160, 0.274)),
+                              url('/assets/images/all-card.jpg');
+            background-position: bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+            cursor: pointer;
+
+
+            .all-content-container
+            {
+
+                .all
+                {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background-color: purple;
+                }
+            }
+        }
+
+
+        .ClickedAllCard{
+            padding: 10px;
+            transition: border-bottom 0.3s;
+            cursor: pointer;
+        }
+    
+        .ClickedAllCard.active{
+            border-radius: 5px;
+            border-bottom: 3px solid purple;
+    
+        }
+
+        .active-card
+        {
+            border-bottom: 3px solid purple;
+            color: purple;
+            font-weight: bold;
+            background-image: linear-gradient(  rgba(224, 72, 224, 0.397), rgba(224, 72, 224, 0.397)),
+                              url('/assets/images/active-card.jpg');
+            background-position: bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+            cursor: pointer;
+
+            .active-content
+            {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: purple;
+            }
+        }
+        .approved-card
+        {
+
+            color: white;
+            -webkit-text-stroke: 1px #F8F8F8;
+            text-shadow: 2px 4px 6px green;
+
+            border-bottom: 3px solid darkolivegreen;
+            //color: darkolivegreen;
+            font-weight: bold;
+            background-image: linear-gradient(  rgba(127, 170, 53, 0.342), rgba(127, 170, 53, 0.342)),
+                              url('/assets/images/active-card.jpg');
+            background-position: bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+            cursor: pointer;
+
+            .approved
+            {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: darkolivegreen;
+            }
+        }
+
+        .ClickedApproveCard{
+            padding: 10px;    
+            transition: border-bottom 0.3s;
+            cursor: pointer;
+        }
+    
+        .ClickedApproveCard.active{
+            border-radius: 5px;
+            border-bottom: 3px solid green;
+        }
+
+        .pending-card
+        {
+
+            color: white;
+            -webkit-text-stroke: 1px #F8F8F8;
+            text-shadow: 2px 4px 6px rgb(121, 44, 44);
+
+            border-bottom: 3px solid darkgoldenrod;
+            font-weight: bold;
+            background-image: linear-gradient(   rgba(184, 135, 11, 0.37), rgba(184, 135, 11, 0.37)),
+                              url('/assets/images/pending-card.jpg');
+            background-position: bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+            cursor: pointer;
+
+            .pending
+            {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: darkgoldenrod;
+            }
+        }
+
+        .ClickedPendingCard{
+            padding: 10px;    
+            transition: border-bottom 0.3s;
+            cursor: pointer;
+        }
+    
+        .ClickedPendingCard.active{
+            border-radius: 5px;
+            border-bottom: 3px solid darkgoldenrod;
+        }
+
+        .rejected-card
+        {
+
+            color: white;
+       -webkit-text-stroke: 1px #F8F8F8;
+        text-shadow: 2px 4px 6px red;
+
+            border-bottom: 3px solid red;
+            // color: red;
+            font-weight: bold;
+            background-image: linear-gradient(   rgba(194, 82, 82, 0.253), rgba(194, 82, 82, 0.253)),
+                              url('/assets/images/reject-card.jpg');
+            background-position: bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+            cursor: pointer;
+
+            .rejected-card-content
+            {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: red;
+            }
+        }
+
+        .ClickedRejectCard{
+            padding: 10px;    
+            transition: border-bottom 0.3s;
+            cursor: pointer;
+        }
+    
+        .ClickedRejectCard.active{
+            border-radius: 5px;
+            border-bottom: 3px solid red;
+        }
+    }
+}
+
+.download-btn
+{
+    background-color: rgb(101, 168, 101) !important;
+    color: white !important;
+}
+
+.cancel-btn
+{
+    background-color: rgb(199, 92, 92) !important;
+    color: white !important;
+}
+
+.eye-icon
+{
+    cursor: pointer;
 }

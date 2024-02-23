@@ -1,101 +1,51 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ChartType } from "chart.js";
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { LoginService } from '../../../Services/login.service';
+import { GateEntryService } from '../../../Services/gate-entry.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DashboardTable } from '../../../Models/dashboardTable';
+import { FormControl } from '@angular/forms';
+import { SelectionModel } from '@angular/cdk/collections';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { CommonService } from '../../../Services/common.service';
+import { snackbarStatus } from '../../../Enums/notification-snackbar';
+import { FileSaverService } from '../../../Services/file-saver.service';
+import { CommonSpinnerService } from '../../../Services/common-spinner.service';
 
 
 @Component({
   selector: 'ngx-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  encapsulation : ViewEncapsulation.None
 })
 export class DashboardComponent {
     
-    @ViewChild(MatPaginator) paginator : MatPaginator;
-    UserName : any;
-    displayedColumns : any[] = [];
+@ViewChild(MatPaginator) paginator : MatPaginator;
+userDetails : any;
+displayedColumns : any[] = [];
+dataSource = new MatTableDataSource();
+GateEntryDetails : any [] = [];
+dashboardTable = new DashboardTable();
+activeCard : number = 0;
+
+selection = new SelectionModel<any>(true, []);
 
 
-  // Donut Chart
-  public doughnutChartLabels : any[] = ['BU Rep', 'BU Head', 'Controller'];
-  public doughnutChartData: any[] = [1,1,2];
-  public doughnutChartType : ChartType = 'doughnut';
-  public colors: any[] = [{ backgroundColor: ["#52de97", '#4452c6', "#fb7800"] }];
-  public doughnutChartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    legend: {
-        position: "right",
-        labels: {
-            fontSize: 12,
+constructor(private router : Router, 
+            private _loginService : LoginService, 
+            private _gateEntryService : GateEntryService, 
+            public snackBar: MatSnackBar, 
+            private _commonService : CommonService, 
+            private _commonSpinner : CommonSpinnerService,  
+            private _fileSaver : FileSaverService){
 
-            render: 'percentage',
-            padding: 20,
-            usePointStyle: true,
-        },
-    },
-    cutoutPercentage: 60,
-    elements: {
-        arc: {
-            borderWidth: 0,
-        },
-    },
-    plugins: {
-        labels: {
-            render: function (args) {
-                return args.value + "\n(" + args.percentage + "%" + ")";
-            },
-            fontColor: "#000",
-            position: "default",
+    this.userDetails = _loginService.decryptToken(localStorage.getItem('TciToken'));
 
-            // outsidePadding: 0,
-            // textMargin: 0
-        },
-    },
-};
-
-public doughnutChartLabels1 : any[] = ['Success rate', 'Pending Data'];
-public doughnutChartData1: any[] = [1,1];
-public doughnutChartType1 : ChartType = 'doughnut';
-public colors1: any[] = [{ backgroundColor: ["#79fa46", '#f73025'] }];
-public doughnutChartOptions1 = {
-  responsive: true,
-  maintainAspectRatio: false,
-  legend: {
-      position: "right",
-      labels: {
-          fontSize: 13,
-          render: 'percentage',
-          padding: 30,
-          usePointStyle: true,
-      },
-  },
-  cutoutPercentage: 80,
-  elements: {
-      arc: {
-          borderWidth: 0,
-      },
-  },
-  plugins: {
-      labels: {
-          render: function (args) {
-              return args.value + "\n(" + args.percentage + "%" + ")";
-          },
-          fontColor: "#000",
-          position: "default",
-
-          // outsidePadding: 0,
-          // textMargin: 0
-      },
-  },
-};
-
-constructor(private router : Router){
-
-    this.UserName = localStorage.getItem('UserName');
-
-    if(this.UserName == 'User')
+    if(this.userDetails.Role == 'I')
     {
         this.displayedColumns = [
             'GATE_ENTRY_NO',
@@ -104,6 +54,7 @@ constructor(private router : Router){
             'INVOICE_NO',
             'INVOICE_DATE',
             'RECEIVED_DATE',
+            'REVIEW'
         ]
     }
     else
@@ -120,38 +71,146 @@ constructor(private router : Router){
     }
 
 }
-
-
-
-GateEntryDetails = [
-    {GATE_ENTRY_NO:8938,PLANT:'8938',GATE_ENTRY_DATE:'28/09/2022', INVOICE_NO:'2236/112/22-23',INVOICE_DATE:'01/09/2022', PO_DATE:'10/09/2022', RECEIVED_DATE:'29/09/2022'},
-    {GATE_ENTRY_NO:8938,PLANT:'8937',GATE_ENTRY_DATE:'27/09/2022', INVOICE_NO:'2235/112/22-23',INVOICE_DATE:'02/09/2022', PO_DATE:'11/09/2022', RECEIVED_DATE:'28/09/2022'},
-    {GATE_ENTRY_NO:3875,PLANT:'0936',GATE_ENTRY_DATE:'28/09/2022', INVOICE_NO:'2234/112/22-23',INVOICE_DATE:'03/09/2022', PO_DATE:'12/09/2022', RECEIVED_DATE:'27/09/2022'},    
-    {GATE_ENTRY_NO:3874,PLANT:'0935',GATE_ENTRY_DATE:'25/09/2022', INVOICE_NO:'2233/112/22-23',INVOICE_DATE:'04/09/2022', PO_DATE:'13/09/2022', RECEIVED_DATE:'25/09/2022'},
-    {GATE_ENTRY_NO:3872,PLANT:'0933',GATE_ENTRY_DATE:'26/09/2022', INVOICE_NO:'2232/112/22-23',INVOICE_DATE:'05/09/2022', PO_DATE:'14/09/2022', RECEIVED_DATE:'24/09/2022'},
-    {GATE_ENTRY_NO:3871,PLANT:'0932',GATE_ENTRY_DATE:'24/09/2022', INVOICE_NO:'2231/112/22-23',INVOICE_DATE:'06/09/2022', PO_DATE:'15/09/2022', RECEIVED_DATE:'23/09/2022'},
-    {GATE_ENTRY_NO:3870,PLANT:'0931',GATE_ENTRY_DATE:'23/09/2022', INVOICE_NO:'2239/112/22-23',INVOICE_DATE:'07/09/2022', PO_DATE:'16/09/2022', RECEIVED_DATE:'22/09/2022'},
-    {GATE_ENTRY_NO:3877,PLANT:'0930',GATE_ENTRY_DATE:'22/09/2022', INVOICE_NO:'2237/112/22-23',INVOICE_DATE:'08/09/2022', PO_DATE:'17/09/2022', RECEIVED_DATE:'21/09/2022'}
-];
-
-dataSource = new MatTableDataSource(this.GateEntryDetails);
-
-    ngAfterViewInit(){
-        this.dataSource.paginator = this.paginator;
-    }
+/** Constructor End */
 
 ngOnInit(): void {
+  this.CardClicked(1);
+  this.getGateEntry();
+}
 
-    // Search Filter for Gate Entry No, Plant, Invoice No
-    this.dataSource.filterPredicate = function (GateEntryDetails,filter) {
-      return GateEntryDetails.GATE_ENTRY_NO.toString().includes(filter) || GateEntryDetails.PLANT.toString().includes(filter) || GateEntryDetails.INVOICE_NO.toString().includes(filter);
+/** Get the Gate Entry Details Based on the Selected Cards Status */
+selectedCard(status)
+{
+  if(status == "All")
+  {
+    this.dataSource = new MatTableDataSource(this.dashboardTable.allGateEntry);
+  }
+  if(status == "Pending")
+  {
+    this.dataSource = new MatTableDataSource(this.dashboardTable.pendingGateEntry);
+  }
+  if(status == "Approve")
+  {
+    this.dataSource = new MatTableDataSource(this.dashboardTable.approvedGateEntry);
+  }
+  if(status == "Reject")
+  {
+    this.dataSource = new MatTableDataSource(this.dashboardTable.rejectedGateEntry);
+  }
+  this.dataSource.paginator = this.paginator;
+}
+
+/** Get Method for Gate Entry Details */
+getGateEntry()
+{
+    this._gateEntryService.getGateEntryDetails(this.userDetails.Role, this.userDetails.UserId).subscribe({
+        next : (response) => 
+        {
+            this.GateEntryDetails = response;
+            if(this.GateEntryDetails.length > 0)
+            {
+                this.dataSource = new MatTableDataSource(this.GateEntryDetails);
+                this.dataSource.paginator = this.paginator;
+                this.getCount(this.GateEntryDetails);
+            }
+        },error : (err) => {
+          // this._loginService.showToast(err.error.Message, "danger", "bottom-end");
+          this._commonService.openSnackbar(err, snackbarStatus.Danger);
+        },
+    })
+}
+
+/** Click Method for Gate Entry Status in Cards */
+CardClicked(cardnumber : number) : void
+{
+  this.activeCard = cardnumber;
+}
+
+   /** Whether the number of selected elements matches the total number of rows. */
+   isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+  
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+  
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
+
+/** Export to Excel as Gate Entry Details */
+download() : void
+{
+  if(this.GateEntryDetails.length > 0)
+  {
+
+    this._commonSpinner.showSpinner();
+    var selectedTrackingNo : number [] = [];
+    this.GateEntryDetails.forEach(element => {
+      selectedTrackingNo.push(element.gateEntryNo); 
+    });
+
+    // this._spinner.show();
+    this._gateEntryService.downloadExcel(selectedTrackingNo).subscribe({
+      next : async (response) => 
+      {
+        this._commonSpinner.hideSpinner();
+        await this._fileSaver.downloadFile(response);
+        this._commonService.openSnackbar("Downloaded Successfully", snackbarStatus.Success);
+      },error : (err) => {
+        this._commonSpinner.hideSpinner();
+        this._commonService.openSnackbar(err, snackbarStatus.Danger);
+      },
+    })
+    
+    this.CardClicked(1);
+
+    this.dataSource = new MatTableDataSource(this.GateEntryDetails);
+    this.dataSource.paginator = this.paginator;
+
+  }
+  else
+  {
+    this._commonService.openSnackbar("No Gate Entry has Created", snackbarStatus.Danger);
+    
+  }
 }
 
-
-// Search Filter for Gate Entry No, Plant, Invoice No
-applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+/** Redirect to the Approval Page */
+approve(gateEntryNo) : void
+{
+    this.router.navigate(['pages/entry-pages/approval'], {queryParams : { GateEntryNo : gateEntryNo }});
 }
+
+/** Get All, Active, Pending, Approved, Rajected Count */
+getCount(tableData) : void
+{
+    this.dashboardTable.allGateEntry = tableData;
+    tableData.forEach(element => {
+        if(element.status == "Pending")
+        {
+            this.dashboardTable.pendingGateEntry.push(element);
+        }
+        else if(element.status == "Approved")
+        {
+            this.dashboardTable.approvedGateEntry.push(element);
+        }
+        else if(element.status == "Rejected")
+        {
+            this.dashboardTable.rejectedGateEntry.push(element);
+        }
+    });
+}
+
 }
 

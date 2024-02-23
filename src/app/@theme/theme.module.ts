@@ -15,6 +15,10 @@ import {
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSecurityModule } from '@nebular/security';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import {
   FooterComponent,
@@ -74,7 +78,7 @@ const PIPES = [
 const routes : Routes = [];
 
 @NgModule({
-  imports: [CommonModule, ...NB_MODULES, RouterModule.forChild(routes)],
+  imports: [CommonModule, ...NB_MODULES, RouterModule.forChild(routes), MatMenuModule, MatIconModule, MatButtonModule, MatDialogModule],
   exports: [CommonModule, ...PIPES, ...COMPONENTS],
   declarations: [...COMPONENTS, ...PIPES],
 })

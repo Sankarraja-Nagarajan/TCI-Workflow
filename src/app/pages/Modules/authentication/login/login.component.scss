@@ -1,45 +1,87 @@
-.login-container
-{
-
-    background-image: url('/assets/images/bg.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    .login-container-content
+    .login-container
     {
 
-        mat-card
+        .login-btn
         {
-            background-color: rgba(226, 226, 226, 0.897);
-            box-shadow: 0 2px 6px 0 rgba(31, 0, 158, 0.16);
-
-
-            .title
-            {
-                font-size: 30px;
-                font-weight: bold;
-                font-family: Arial, Helvetica, sans-serif;
-            }
-
-            .forgot
-            {
-                color: rgb(112, 105, 93);
-                cursor: pointer;
-                font-size: 12px;
-                font-family: Arial, Helvetica, sans-serif;
-            }     
-            
-            button
-            {
-                width: 50%;
-                background-color: rgb(255, 136, 0);
-                color: white;
-                font-size: 15px;
-                box-shadow: 0 2px 6px 0 rgba(31, 0, 158, 0.16);
-                border-radius: 40px;
-            }
-            
+            background-color: rgb(207, 161, 74) !important;
+            color: white !important;
         }
 
+        .row
+        {
+            margin-top: 0px !important;
+            margin-left: 0px !important;
+            margin-right: 0px !important;
+        }
+
+        background-image: url('/assets/images/bg.jpg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        .login-container-content
+        {
+
+            mat-card
+            {
+                background-color: rgba(226, 226, 226, 0.897);
+                box-shadow: 0 2px 6px 0 rgba(31, 0, 158, 0.16);
+
+
+                .title
+                {
+                    font-size: 30px;
+                    font-weight: bold;
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+
+                .forgot
+                {
+                    color: rgb(112, 105, 93);
+                    cursor: pointer;
+                    font-weight: bold;
+                    font-size: 12px;
+                    font-family: Arial, Helvetica, sans-serif;
+                }     
+                
+                .button
+                {
+                    width: 50%;
+                    height: 40px;
+                    background-color: rgb(255, 136, 0);
+                    color: white;
+                    font-size: 15px;
+                    box-shadow: 0 2px 6px 0 rgba(31, 0, 158, 0.16);
+                    border-radius: 40px;
+                    cursor: pointer;
+
+                    .btn-title
+                    {
+                        font-size: 15px;
+                        font-weight: bold;
+                    }
+
+                }
+                
+            }
+
+        }
     }
-}
+    // .green-snackbar
+    // {
+        .green .mat-mdc-snack-bar-container .mdc-snackbar__surface
+        {
+            background-color: green !important;
+            color:white;
+
+            .mdc-button .mdc-button__label
+            {
+                color: white;
+            }
+
+        }
+    // }
+
+    .userActivationDialog
+    {
+        background: rgba(128, 128, 128, 0.61)
+    }

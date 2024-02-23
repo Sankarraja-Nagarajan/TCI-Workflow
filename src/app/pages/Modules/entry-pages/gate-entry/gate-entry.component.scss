@@ -4,14 +4,10 @@
     .heading
     {
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 40px;
+        font-size: 30px;
         font-weight: bold;
         color: orange;
     }
-}
-button
-{
-    width: 10%;
 }
 
 .title
@@ -31,94 +27,7 @@ mat-table
         font-family: Arial, Helvetica, sans-serif;
     }
 }
-mat-icon
-{
-    color: orange !important;
-}
 
-form
-{
-    #gatentryno
-    {
-        mat-form-field
-        {
-            width: 130px !important;
-        }
-    }
-    #plant
-    {
-        mat-form-field
-        {
-            width: 100px !important;
-        }
-    }
-    #gatentrydate
-    {
-        mat-form-field
-        {
-            width: 130px !important;
-        }
-    }
-    #gatentrytime
-    {
-        mat-form-field
-        {
-            width: 130px !important;
-        }
-    }
-    #po
-    {
-        mat-form-field
-        {
-            width: 150px !important;
-        }
-    }
-    #podate
-    {
-        mat-form-field
-        {
-            width: 130px !important;
-        }
-    }
-    #receiveddate
-    {
-        mat-form-field
-        {
-            width: 150px !important;
-        }
-    }
-    #invoicedate
-    {
-        mat-form-field
-        {
-            width: 150px !important;
-        }
-    }
-    #vehicleno
-    {
-        mat-form-field
-        {
-            width: 150px !important;
-        }
-    }
-    #lr
-    {
-        mat-form-field
-        {
-            width: 150px !important;
-        }
-    }
-    #costcenter
-    {
-        mat-form-field
-        {
-            width: 150px !important;
-        }
-    }
-}
-// .mat-mdc-text-field-wrapper {
-//     height: 40px !important;
-// }
 
 #gateEntry-container
 {
@@ -131,7 +40,33 @@ form
     }
 }
 
-.mat-mdc-icon-button {
-    --mat-mdc-button-persistent-ripple-color: none;
-    --mat-mdc-button-ripple-color: none;
+.search-icon
+{
+    color: black !important;
+}
+
+.cancel-btn
+{
+    background-color: rgb(160, 42, 42) !important;
+    color: white !important;
+}
+
+.save-btn
+{
+    background-color: rgb(71, 170, 71) !important;
+    color: white !important;
+}
+
+.UploadBtn
+{
+    background-color: darkgray !important;
+    color: white !important;
+}
+
+.poNumber-field
+{
+    mat-icon
+    {
+        cursor: pointer;
+    }
 }
