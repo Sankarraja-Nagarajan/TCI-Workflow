@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -17,27 +17,42 @@ import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { ApprovalComponent } from './approval/approval.component'
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { AuthGuard } from '../../../Guards/auth.guard';
+import { TrackingDialogComponent } from './tracking-dialog/tracking-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes : Routes = [
   {
     path : 'dashboard',
-    component : DashboardComponent
+    component : DashboardComponent,
+    canActivate : [AuthGuard]
   },
   {
     path : 'gate-entry',
-    component : GateEntryComponent
+    component : GateEntryComponent,
+    canActivate : [AuthGuard]
   },
   {
     path : 'approval',
-    component : ApprovalComponent
-  }
+    component : ApprovalComponent,
+    canActivate : [AuthGuard]
+  },
+  {
+    path : 'tracking-dialog',
+    component : TrackingDialogComponent
+  },
 ];
 
 @NgModule({
   declarations: [
     DashboardComponent,
     GateEntryComponent,
-    ApprovalComponent
+    ApprovalComponent,
+    TrackingDialogComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +69,13 @@ const routes : Routes = [
     FormsModule,
     ChartsModule,
     MatNativeDateModule,
-    MatCardModule
-  ]
+    MatCardModule,
+    MatSnackBarModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    NgxSpinnerModule,
+    MatDialogModule,
+  ],
+  schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class EntryPagesModule { }

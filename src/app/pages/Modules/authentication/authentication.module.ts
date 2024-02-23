@@ -7,7 +7,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ForgotPasswordDialogComponent } from './forgot-password-dialog/forgot-password-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 const routes : Routes = [
@@ -24,7 +29,8 @@ const routes : Routes = [
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    ForgotPasswordDialogComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +40,11 @@ const routes : Routes = [
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatToolbarModule,
+    NgxSpinnerModule,
   ]
 })
 export class AuthenticationModule { }

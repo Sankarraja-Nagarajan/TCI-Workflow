@@ -6,7 +6,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
@@ -20,6 +20,9 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { CommonInterceptor } from './Interceptors/common.interceptor';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,7 +42,12 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    HttpClientModule,
+    NbToastrModule,
+    NgxSpinnerModule,
+    MatSnackBarModule,
   ],
+  providers: [{provide : HTTP_INTERCEPTORS, useClass : CommonInterceptor, multi : true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {

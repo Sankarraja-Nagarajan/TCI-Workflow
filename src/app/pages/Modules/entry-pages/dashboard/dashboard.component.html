@@ -1,97 +1,152 @@
 <div class="container-fluid row gap-3" id="dashboard">
-    <div class="row gap-5">
-        <div class="tile col-md-4">
-            <span class="title row  p-2">APPROVAL STATUS</span>
-            <div class="border"></div>
-            <div id="doughnutChart" class="row justify-content-center align-items-center mt-1">
-                <canvas baseChart style=" height: 160px"
-                        [data]="doughnutChartData"
-                        [labels]="doughnutChartLabels"
-                        [chartType]="doughnutChartType" 
-                        [options]="doughnutChartOptions"
-                        [colors]="colors">
-                </canvas>
-            </div>
-        </div>
-        <div class="tile col-md-4">
-            <span class="title row  p-2">STATUS</span>
-            <div class="border"></div>
-            <div id="doughnutChart" class="row justify-content-center align-items-center mt-1">
-                <canvas baseChart style=" height: 160px"
-                        [data]="doughnutChartData1"
-                        [labels]="doughnutChartLabels1"
-                        [chartType]="doughnutChartType1" 
-                        [options]="doughnutChartOptions1"
-                        [colors]="colors1">
-                </canvas>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="Search">
-                <mat-form-field class="w-100 Search" appearance="outline">
-                    <mat-label>Search Gate Entry No...</mat-label>
-                    <input matInput (keyup)="applyFilter($event.target.value)" #input>
-                </mat-form-field>
-            </div>
-            <div class="row">
-                <div class="col d-flex align-items-center">
-                    <img class="w-100" src="/assets/images/Continental-Logo.png" alt="Continental Logo">
+    <div class="cards-container">
+        <mat-card>
+            <div class="row m-3 gy-3 cards-content">
+                <div class="col-sm-6 col-md-3 ClickedAllCard" [class.active]="activeCard == 1">
+                    <mat-card class="all-card" (click)="selectedCard('All')" (click)="CardClicked(1)">
+                        <div class="all-content-container">
+                            <div class="d-flex gap-2 m-3 all-content">
+                                <div class="d-flex align-items-center">
+                                    <div class="all"></div>
+                                </div>
+                                <div>ALL</div>
+                            </div>
+                            <div class="d-flex justify-content-center mt-3 count">{{dashboardTable.allGateEntry.length}}</div>
+                        </div>
+                    </mat-card>
                 </div>
-                <div class="col">
-                    <img class="w-75" src="/assets/images/logo.png" alt="Continental Logo">
+                <div class="col-sm-6 col-md-3 ClickedPendingCard" [class.active]="activeCard == 2">
+                    <mat-card class="p-2 pending-card" (click)="selectedCard('Pending')" (click)="CardClicked(2)">
+                        <div>
+                            <div class="d-flex gap-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="pending"></div>
+                                </div>
+                                <div>PENDING</div>
+                            </div>
+                            <div class="d-flex justify-content-center mt-3 count">{{dashboardTable.pendingGateEntry.length}}</div>
+                        </div>
+                    </mat-card>
+                </div>
+                <div class="col-sm-6 col-md-3 ClickedApproveCard" [class.active]="activeCard == 3">
+                    <mat-card class="p-2 approved-card" (click)="selectedCard('Approve')" (click)="CardClicked(3)">
+                        <div>
+                            <div class="d-flex gap-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="approved"></div>
+                                </div>
+                                <div>APPROVED</div>
+                            </div>
+                            <div class="d-flex justify-content-center mt-3 count">{{dashboardTable.approvedGateEntry.length}}</div>
+                        </div>
+                    </mat-card>
+                </div>
+                <div class="col-sm-6 col-md-3 ClickedRejectCard" [class.active]="activeCard == 4">
+                    <mat-card class="p-2 rejected-card" (click)="selectedCard('Reject')" (click)="CardClicked(4)">
+                        <div>
+                            <div class="d-flex gap-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="rejected-card-content"></div>
+                                </div>
+                                <div>REJECTED</div>
+                            </div>
+                            <div class="d-flex justify-content-center mt-3 count">{{dashboardTable.rejectedGateEntry.length}}</div>
+                        </div>
+                    </mat-card>
                 </div>
             </div>
-        </div>
+        </mat-card>
     </div>
     <div>
         <div class="table-header d-flex align-items-center"><span class="table-header-title ps-3">Table Data</span></div>
-        <div class="overflow-auto mat-elevation-z8 p-4 rounded-2 table-content">
-            <table mat-table [dataSource]="dataSource">
-                <ng-container matColumnDef="GATE_ENTRY_NO">
-                    <th mat-header-cell *matHeaderCellDef> Gate Entry NO </th>
-                    <td mat-cell *matCellDef="let element"> {{element.GATE_ENTRY_NO}} </td>
-                </ng-container>
-                <ng-container matColumnDef="PLANT">
-                    <th mat-header-cell *matHeaderCellDef> Plant </th>
-                    <td mat-cell *matCellDef="let element"> {{element.PLANT}} </td>
-                </ng-container>
-                <ng-container matColumnDef="GATE_ENTRY_DATE">
-                    <th mat-header-cell *matHeaderCellDef> Gate Entry Date </th>
-                    <td mat-cell *matCellDef="let element"> {{element.GATE_ENTRY_DATE}} </td>
-                </ng-container>
-               
-                <ng-container matColumnDef="INVOICE_NO">
-                    <th mat-header-cell *matHeaderCellDef> Invoice NO </th>
-                    <td mat-cell *matCellDef="let element"> {{element.INVOICE_NO}} </td>
-                </ng-container>
-                <ng-container matColumnDef="INVOICE_DATE">
-                    <th mat-header-cell *matHeaderCellDef> Invoice Date </th>
-                    <td mat-cell *matCellDef="let element"> {{element.INVOICE_DATE}} </td>
-                </ng-container>
-                <ng-container matColumnDef="RECEIVED_DATE">
-                    <th mat-header-cell *matHeaderCellDef> Received Date </th>
-                    <td mat-cell *matCellDef="let element"> {{element.RECEIVED_DATE}} </td>
-                </ng-container>
-                <ng-container matColumnDef="STATUS" *ngIf="UserName != 'User'">
-                    <th mat-header-cell *matHeaderCellDef> Status </th>
-                    <td mat-cell *matCellDef="let element"> 
-                        <button mat-raised-button routerLink="/pages/entry-pages/approval">Approve</button>
-                    </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-            <div *ngIf="!GateEntryDetails?.length" class="d-flex align-items-center p-3 gap-3">
-                <mat-icon class="icon">info</mat-icon>
-                <span>No Records Found.....</span>
+        <div class="p-3 mat-elevation-z8 rounded-2 table-content-container">
+            <div class="row justify-content-md-end">
+
+                <div class="row mb-3" *ngIf="userDetails.Role == 'I'">
+                    <div class="col" *ngIf="!showDownload">
+                        <button mat-raised-button class="download-btn" (click)="download()"><mat-icon>download</mat-icon> Export Excel </button>
+                    </div>
+                 </div>
+
             </div>
-            <mat-paginator class="justify-content-end p-0"
-                  [style.display]="GateEntryDetails?.length?'inherit':'none'"
-                  [length]="GateEntryDetails?.length"
-                  [pageSize]="3"
-                  [pageSizeOptions]="[3, 10, 25, 100]"
-                  aria-label="Select page">
-            </mat-paginator>
+            <div class="overflow-auto rounded-2 table-content">
+                <table mat-table [dataSource]="dataSource">
+
+                    <ng-container matColumnDef="GATE_ENTRY_NO">
+                        <th mat-header-cell *matHeaderCellDef> Gate Entry NO </th>
+                        <td mat-cell *matCellDef="let element"> {{element.gateEntryNo}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="PLANT">
+                        <th mat-header-cell *matHeaderCellDef> Plant </th>
+                        <td mat-cell *matCellDef="let element"> {{element.plant}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="GATE_ENTRY_DATE">
+                        <th mat-header-cell *matHeaderCellDef> Gate Entry Date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.gateEntryDate}} </td>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="INVOICE_NO">
+                        <th mat-header-cell *matHeaderCellDef> Invoice NO </th>
+                        <td mat-cell *matCellDef="let element"> {{element.invoiceNo}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="INVOICE_DATE">
+                        <th mat-header-cell *matHeaderCellDef> Invoice Date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.invoiceDate}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="RECEIVED_DATE">
+                        <th mat-header-cell *matHeaderCellDef> Received Date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.receivedDate | date : "dd-MM-yyyy"}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="REVIEW" *ngIf="this.userDetails.Role == 'I'">
+                        <th mat-header-cell *matHeaderCellDef> Status </th>
+                        <td mat-cell *matCellDef="let element"> 
+                            <mat-icon class="eye-icon" (click)="approve(element.gateEntryNo)">remove_red_eye</mat-icon>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="STATUS" *ngIf="this.userDetails.Role != 'I'">
+                        <th mat-header-cell *matHeaderCellDef> Status </th>
+                        <td mat-cell *matCellDef="let element"> 
+                            <button class="active-btn" *ngIf="element.status == 'Active'" mat-raised-button (click)="approve(element.gateEntryNo)">Approve</button>
+                            <span class="approved" *ngIf="element.status == 'Approved'" (click)="approve(element.gateEntryNo)">{{element.status}}</span>
+                            <span class="rejected" *ngIf="element.status == 'Rejected'" (click)="approve(element.gateEntryNo)">{{element.status}}</span>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <div *ngIf="!GateEntryDetails?.length" class="d-flex align-items-center p-3 gap-3">
+                    <mat-icon class="icon">info</mat-icon>
+                    <span>No Records Found.....</span>
+                </div>
+                <!-- <mat-paginator class="justify-content-end p-0"
+                    [style.display]="GateEntryDetails?.length?'inherit':'none'"
+                    [length]="GateEntryDetails?.length"
+                    [pageSize]="3"
+                    [pageSizeOptions]="[3, 10, 25, 100]"
+                    aria-label="Select page">
+                </mat-paginator> -->
+                <div class="d-flex justify-content-end">
+                    <mat-paginator #paginator
+                                    [style.display]="GateEntryDetails?.length?'inherit':'none'"
+                                   [pageSize]="5"
+                                   [pageSizeOptions]="[5, 10, 50, 100]"
+                                   [showFirstLastButtons]="true">
+                    </mat-paginator>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="large"
+  color="white"
+  type="square-jelly-box"
+  [fullScreen] = "true"
+>
+  <!-- <p style="font-size: 20px; color: white">Loading...</p> -->
+</ngx-spinner>
